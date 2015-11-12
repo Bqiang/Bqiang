@@ -1,0 +1,38 @@
+extends layout
+block content
+    h1 这是首页。
+    hr
+    div(ng-app="todo",ng-controller="todoCtrl")
+        div.inputDiv
+            p
+                label 事件名:
+                input(type="text",ng-model="taskname")
+            p
+                label 时&nbsp;间:
+                input(type="text",ng-model="tasktime")
+            p
+                label 优先级:
+                input(type="text",ng-model="taskpriority")
+        div.operationDiv
+            button(ng-click="btnClickedAdd()") 提交
+            button(ng-click="btnClickedRemove()") 删除
+        div.search
+            input(type="text",id="inputSearch",ng-model="findText")
+            button(ng-click="btnClickedFind()") 查询
+        div.outputDiv
+            table
+                thead
+                    th 事件名称
+                    th 时间
+                    th 优先级
+                    th 操作
+                tbody
+                    tr(ng-repeat="item in list")
+                        td
+                            input(type="checkbox",ng-click="checkedChanged(item)")
+                            span {{item.taskname}}
+                        td {{item.time}}
+                        td {{item.priority}}
+                        td
+                            button(ng-click="btnClickedUpdate(item)") 编辑
+    script(src="/javascripts/todo.js")
